@@ -1,12 +1,13 @@
 # grpc-compiler
 
-[日本語](./README.ja.md)
+[English](./README.md)
 
-The tool to generate gRPC codes by docker.
+gRPCのコードをDockerで手軽に生成するツール。  
+プロジェクトごとに用意するのが面倒だったのでツール化。
 
-## Usage
+## 使い方
 
-### Compile your proto files
+### プロトコルファイルを指定してコンパイル
 
 ```bash
 export GRPC_COMPILER_DIR_PROTO="/path/to/proto"
@@ -17,16 +18,16 @@ cd grpc-compiler/docker
 docker-compose up
 ```
 
-### Example
+### サンプル
 
-`example/proto` is compiled, if `GRPC_COMPILER_DIR_*` is not defined
+`GRPC_COMPILER_DIR_*` を設定していなければ `example/proto` の内容がコンパイルされる。
 
 ```bash
 cd grpc-compiler/docker
 docker-compose up
 ```
 
-## License
+## ライセンス
 
 __NYSL Version 0.9982__  
 See [NYSL.TXT](./NYSL.TXT)
