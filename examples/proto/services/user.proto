@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package mythrnr.grpc_example.services;
+import "messages/user.proto";
+option go_package = "github.com/mythrnr/grpc-compiler/examples/golang/services";
+option php_namespace = "Mythrnr\\GrpcExample\\Services";
+
+service UserService {
+  rpc Get(mythrnr.grpc_example.messages.User) returns (mythrnr.grpc_example.messages.User) {}
+}

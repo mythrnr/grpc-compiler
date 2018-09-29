@@ -1,0 +1,54 @@
+version: "3"
+
+# container to compile .proto files
+services:
+  # Golang
+  golang:
+    build:
+      context: ./golang
+      args:
+        HTTP_PROXY: "${HTTP_PROXY}"
+        HTTPS_PROXY: "${HTTPS_PROXY}"
+        LANG_VERSION: "1.11.0"
+        PROTOC_VERSION: "3.6.1"
+        WORK_DIR: "/go/src/golang/"
+    image: "mythrnr/grpccompiler.golang:latest"
+    command: sh compile.sh
+    volumes:
+      - ${GRPC_COMPILER_DIR_PROTO:-./examples/proto}:/go/src/proto/:ro
+      - ${GRPC_COMPILER_DIR_GOLANG:-../../../}:/go/src/go_out/:rw
+      - ./golang/compile.sh:/go/src/golang/compile.sh
+
+  # PHP
+  php:
+    build:
+      context: ./php
+      args:
+        HTTP_PROXY: "${HTTP_PROXY}"
+        HTTPS_PROXY: "${HTTPS_PROXY}"
+        LANG_VERSION: "7.2.9"
+        PROTOC_VERSION: "3.6.1"
+        WORK_DIR: "/usr/src/php/"
+    image: "mythrnr/grpccompiler.php:latest"
+    command: sh compile.sh
+    volumes:
+      - ${GRPC_COMPILER_DIR_PROTO:-./examples/proto}:/usr/src/proto/:ro
+      - ${GRPC_COMPILER_DIR_PHP:-./examples/php}:/usr/src/php_out/:rw
+      - ./php/compile.sh:/usr/src/php/compile.sh
+
+  # Python
+  python:
+    build:
+      context: ./python
+      args:
+        HTTP_PROXY: "${HTTP_PROXY}"
+        HTTPS_PROXY: "${HTTPS_PROXY}"
+        LANG_VERSION: "3.6.6"
+        PROTOC_VERSION: "3.6.1"
+        WORK_DIR: "/usr/src/python/"
+    image: "mythrnr/grpccompiler.python:latest"
+    command: sh compile.sh
+    volumes:
+      - ${GRPC_COMPILER_DIR_PROTO:-./examples/proto}:/usr/src/proto/:ro
+      - ${GRPC_COMPILER_DIR_PYTHON:-./examples/python}:/usr/src/python_out/:rw
+      - ./python/compile.sh:/usr/src/python/compile.sh

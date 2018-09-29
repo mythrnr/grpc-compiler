@@ -6,7 +6,18 @@ The tool to generate gRPC codes by docker.
 
 ## Usage
 
+### Clone repo
+
+```bash
+mkdir -p /path/to/workspace/github.com/mythrnr
+cd /path/to/workspace/github.com/mythrnr
+
+git clone https://github.com/mythrnr/grpc-compiler.git
+```
+
 ### Compile your proto files
+
+* `GRPC_COMPILER_DIR_GOLANG` is recommended to set `$GOPATH/src`
 
 ```bash
 export GRPC_COMPILER_DIR_PROTO="/path/to/proto"
@@ -20,10 +31,10 @@ docker-compose up
 
 ### Example
 
-`example/proto` is compiled, if `GRPC_COMPILER_DIR_*` is not defined
+`examples/proto` is compiled, if `GRPC_COMPILER_DIR_*` is not defined
 
 ```bash
-cd grpc-compiler/docker
+cd /path/to/mythrnr/grpc-compiler
 docker-compose up
 ```
 

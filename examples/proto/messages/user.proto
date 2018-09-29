@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package mythrnr.grpc_example.messages;
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/mythrnr/grpc-compiler/examples/golang/messages";
+option php_namespace = "Mythrnr\\GrpcExample\\Messages";
+
+message User {
+  int64 id    = 1;
+  string name = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
