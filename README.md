@@ -12,6 +12,7 @@ The tool to generate gRPC codes by docker.
 export GRPC_COMPILER_DIR_PROTO="/path/to/proto"
 export GRPC_COMPILER_DIR_GOLANG="/path/to/go_output"
 export GRPC_COMPILER_DIR_PHP="/path/to/php_output"
+export GRPC_COMPILER_DIR_PYTHON="/path/to/python_output"
 
 cd grpc-compiler/docker
 docker-compose up
