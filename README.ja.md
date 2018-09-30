@@ -18,24 +18,17 @@ git clone https://github.com/mythrnr/grpc-compiler.git
 
 ### プロトコルファイルを指定してコンパイル
 
-* `GRPC_COMPILER_DIR_GOLANG` は `$GOPATH/src` を推奨
+* `GOLANG_OUTOUT_DIR` は `$GOPATH/src` を推奨
 
 ```bash
-export GRPC_COMPILER_DIR_PROTO="/path/to/proto"
-export GRPC_COMPILER_DIR_GOLANG="/path/to/go_output"
-export GRPC_COMPILER_DIR_PHP="/path/to/php_output"
-export GRPC_COMPILER_DIR_PYTHON="/path/to/python_output"
+cd grpc-compiler
+vi .env
 
-cd grpc-compiler/docker
-docker-compose up
-```
+PROTOFILE_DIR="/path/to/proto"
+GOLANG_OUTOUT_DIR="/path/to/go_output"
+PHP_OUTOUT_DIR="/path/to/php_output"
+PYTHON_OUTOUT_DIR="/path/to/python_output"
 
-### サンプル
-
-`GRPC_COMPILER_DIR_*` を設定していなければ `examples/proto` の内容がコンパイルされる。
-
-```bash
-cd /path/to/mythrnr/grpc-compiler
 docker-compose up
 ```
 

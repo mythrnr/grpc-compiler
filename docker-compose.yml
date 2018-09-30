@@ -7,16 +7,16 @@ services:
     build:
       context: ./golang
       args:
-        HTTP_PROXY: "${HTTP_PROXY}"
-        HTTPS_PROXY: "${HTTPS_PROXY}"
-        LANG_VERSION: "1.11.0"
-        PROTOC_VERSION: "3.6.1"
+        HTTP_PROXY: "${BUILD_ARGS_HTTP_PROXY}"
+        HTTPS_PROXY: "${BUILD_ARGS_HTTPS_PROXY}"
+        LANG_VERSION: "${GOLANG_LANG_VERSION}"
+        PROTOC_VERSION: "${PROTOC_VERSION}"
         WORK_DIR: "/go/src/golang/"
     image: "mythrnr/grpccompiler.golang:latest"
     command: sh compile.sh
     volumes:
-      - ${GRPC_COMPILER_DIR_PROTO:-./examples/proto}:/go/src/proto/:ro
-      - ${GRPC_COMPILER_DIR_GOLANG:-../../../}:/go/src/go_out/:rw
+      - ${PROTOFILE_DIR}:/go/src/proto/:ro
+      - ${GOLANG_OUTOUT_DIR}:/go/src/go_out/:rw
       - ./golang/compile.sh:/go/src/golang/compile.sh
 
   # PHP
@@ -24,16 +24,16 @@ services:
     build:
       context: ./php
       args:
-        HTTP_PROXY: "${HTTP_PROXY}"
-        HTTPS_PROXY: "${HTTPS_PROXY}"
-        LANG_VERSION: "7.2.9"
-        PROTOC_VERSION: "3.6.1"
+        HTTP_PROXY: "${BUILD_ARGS_HTTP_PROXY}"
+        HTTPS_PROXY: "${BUILD_ARGS_HTTPS_PROXY}"
+        LANG_VERSION: "${PHP_LANG_VERSION}"
+        PROTOC_VERSION: "${PROTOC_VERSION}"
         WORK_DIR: "/usr/src/php/"
     image: "mythrnr/grpccompiler.php:latest"
     command: sh compile.sh
     volumes:
-      - ${GRPC_COMPILER_DIR_PROTO:-./examples/proto}:/usr/src/proto/:ro
-      - ${GRPC_COMPILER_DIR_PHP:-./examples/php}:/usr/src/php_out/:rw
+      - ${PROTOFILE_DIR}:/usr/src/proto/:ro
+      - ${PHP_OUTOUT_DIR}:/usr/src/php_out/:rw
       - ./php/compile.sh:/usr/src/php/compile.sh
 
   # Python
@@ -41,14 +41,14 @@ services:
     build:
       context: ./python
       args:
-        HTTP_PROXY: "${HTTP_PROXY}"
-        HTTPS_PROXY: "${HTTPS_PROXY}"
-        LANG_VERSION: "3.6.6"
-        PROTOC_VERSION: "3.6.1"
+        HTTP_PROXY: "${BUILD_ARGS_HTTP_PROXY}"
+        HTTPS_PROXY: "${BUILD_ARGS_HTTPS_PROXY}"
+        LANG_VERSION: "${PYTHON_LANG_VERSION}"
+        PROTOC_VERSION: "${PROTOC_VERSION}"
         WORK_DIR: "/usr/src/python/"
     image: "mythrnr/grpccompiler.python:latest"
     command: sh compile.sh
     volumes:
-      - ${GRPC_COMPILER_DIR_PROTO:-./examples/proto}:/usr/src/proto/:ro
-      - ${GRPC_COMPILER_DIR_PYTHON:-./examples/python}:/usr/src/python_out/:rw
+      - ${PROTOFILE_DIR}:/usr/src/proto/:ro
+      - ${PYTHON_OUTOUT_DIR}:/usr/src/python_out/:rw
       - ./python/compile.sh:/usr/src/python/compile.sh

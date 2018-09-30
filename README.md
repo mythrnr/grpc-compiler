@@ -17,24 +17,17 @@ git clone https://github.com/mythrnr/grpc-compiler.git
 
 ### Compile your proto files
 
-* `GRPC_COMPILER_DIR_GOLANG` is recommended to set `$GOPATH/src`
+* `GOLANG_OUTOUT_DIR` is recommended to set `$GOPATH/src`
 
 ```bash
-export GRPC_COMPILER_DIR_PROTO="/path/to/proto"
-export GRPC_COMPILER_DIR_GOLANG="/path/to/go_output"
-export GRPC_COMPILER_DIR_PHP="/path/to/php_output"
-export GRPC_COMPILER_DIR_PYTHON="/path/to/python_output"
+cd grpc-compiler
+vi .env
 
-cd grpc-compiler/docker
-docker-compose up
-```
+PROTOFILE_DIR="/path/to/proto"
+GOLANG_OUTOUT_DIR="/path/to/go_output"
+PHP_OUTOUT_DIR="/path/to/php_output"
+PYTHON_OUTOUT_DIR="/path/to/python_output"
 
-### Example
-
-`examples/proto` is compiled, if `GRPC_COMPILER_DIR_*` is not defined
-
-```bash
-cd /path/to/mythrnr/grpc-compiler
 docker-compose up
 ```
 
