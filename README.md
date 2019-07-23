@@ -9,6 +9,12 @@ The tool to generate gRPC codes by docker.
 - See [Examples](https://github.com/mythrnr/protobuf-compiler/tree/master/examples) for details.
 - Specify `.proto` dir and output dir to [docker-compose.yml](https://github.com/mythrnr/protobuf-compiler/blob/master/examples/docker-compose.yml), and execute `docker-compose up`
 
+## Build with Protocol Buffers version
+
+```bash
+PROTOC_VERSION=3.7.1 PECL_GRPC_VERSION=1.22.0 dcompose build --parallel
+```
+
 ## License
 
 __NYSL Version 0.9982__  
