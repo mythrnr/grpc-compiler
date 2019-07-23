@@ -18,7 +18,7 @@ docker-compose up
 ## Protocol Buffersのバージョンを指定してイメージをビルドする
 
 ```bash
-PROTOC_VERSION=3.7.1 PECL_GRPC_VERSION=1.22.0 dcompose build --parallel
+PROTOC_VERSION=3.7.1 PECL_GRPC_VERSION=1.22.0 docker-compose build --parallel
 ```
 
 ## ライセンス
