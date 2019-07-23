@@ -30,6 +30,6 @@ RUN set -x \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
 
-COPY ./compile.sh ./
+COPY ./gendoc.sh ./
 
-CMD ["sh", "compile.sh"]
+CMD ["sh", "gendoc.sh"]

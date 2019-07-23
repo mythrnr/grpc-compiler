@@ -1,54 +1,24 @@
-version: "3"
+version: '3.7'
 
-# container to compile .proto files
 services:
-  # Golang
   golang:
     build:
       context: ./golang
-      args:
-        HTTP_PROXY: "${BUILD_ARGS_HTTP_PROXY}"
-        HTTPS_PROXY: "${BUILD_ARGS_HTTPS_PROXY}"
-        LANG_VERSION: "${GOLANG_LANG_VERSION}"
-        PROTOC_VERSION: "${PROTOC_VERSION}"
-        WORK_DIR: "/go/src/golang/"
-    image: "mythrnr/grpccompiler.golang:latest"
-    command: sh compile.sh
-    volumes:
-      - ${PROTOFILE_DIR}:/go/src/proto/:ro
-      - ${GOLANG_OUTOUT_DIR}:/go/src/go_out/:rw
-      - ./golang/compile.sh:/go/src/golang/compile.sh
+      args: &buildargs
+        HTTP_PROXY: "${HTTP_PROXY}"
+        HTTPS_PROXY: "${HTTPS_PROXY}"
+    image: "zdcconsumer/basis.protobuf-compiler:golang"
 
-  # PHP
+
+  docs:
+    build:
+      context: ./docs
+      args: *buildargs
+    image: "zdcconsumer/basis.protobuf-compiler:docs"
+
+
   php:
     build:
       context: ./php
-      args:
-        HTTP_PROXY: "${BUILD_ARGS_HTTP_PROXY}"
-        HTTPS_PROXY: "${BUILD_ARGS_HTTPS_PROXY}"
-        LANG_VERSION: "${PHP_LANG_VERSION}"
-        PROTOC_VERSION: "${PROTOC_VERSION}"
-        WORK_DIR: "/usr/src/php/"
-    image: "mythrnr/grpccompiler.php:latest"
-    command: sh compile.sh
-    volumes:
-      - ${PROTOFILE_DIR}:/usr/src/proto/:ro
-      - ${PHP_OUTOUT_DIR}:/usr/src/php_out/:rw
-      - ./php/compile.sh:/usr/src/php/compile.sh
-
-  # Python
-  python:
-    build:
-      context: ./python
-      args:
-        HTTP_PROXY: "${BUILD_ARGS_HTTP_PROXY}"
-        HTTPS_PROXY: "${BUILD_ARGS_HTTPS_PROXY}"
-        LANG_VERSION: "${PYTHON_LANG_VERSION}"
-        PROTOC_VERSION: "${PROTOC_VERSION}"
-        WORK_DIR: "/usr/src/python/"
-    image: "mythrnr/grpccompiler.python:latest"
-    command: sh compile.sh
-    volumes:
-      - ${PROTOFILE_DIR}:/usr/src/proto/:ro
-      - ${PYTHON_OUTOUT_DIR}:/usr/src/python_out/:rw
-      - ./python/compile.sh:/usr/src/python/compile.sh
+      args: *buildargs
+    image: "zdcconsumer/basis.protobuf-compiler:php"

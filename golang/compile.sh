@@ -1,9 +1,8 @@
 #!/bin/sh
 
-PROTO_DIR="/go/src/proto"
-PROJECT_DIR="/go/src/go_out"
-
-mkdir -p $PROJECT_DIR
+PROTO_DIR="/proto"
+OUTPUT_DIR="/output"
+PACKAGE_DIR="/go/src/"${PACKAGE_ROOT:?"Package Root dir is not defined. please set Environment variable by name PACKAGE_ROOT"}
 
 function convert_recursive() {
     if [ -d $1 ]; then
@@ -14,10 +13,12 @@ function convert_recursive() {
         protoc \
             -I /usr/include \
             --proto_path=$PROTO_DIR \
-            --go_out=plugins=grpc:$PROJECT_DIR \
+            --go_out=plugins=grpc:/go/src \
             $1
     fi
 }
 
 set -ex
+
 convert_recursive $PROTO_DIR
+cp -r $PACKAGE_DIR/* $OUTPUT_DIR
