@@ -7,7 +7,6 @@ ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v$
 
 RUN set -x \
     && apk update \
-    && apk upgrade \
     && apk add --no-cache \
         libstdc++ \
     && apk add --no-cache --virtual needless_libset \
