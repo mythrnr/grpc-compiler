@@ -1,14 +1,14 @@
 # protobuf-compiler
 
-[English](./README.md)
+[English](https://github.com/mythrnr/protobuf-compiler/blob/master/README.md)
 
 gRPCのコードをDockerで手軽に生成するツール。  
 プロジェクトごとに用意するのが面倒だったのでツール化。
 
 ## 使い方
 
-- 詳細は [Examples](./examples) を参照
-- [docker-compose.yml](./examples/docker-compose.yml) に
+- 詳細は [Examples](https://github.com/mythrnr/protobuf-compiler/tree/master/examples) を参照
+- [docker-compose.yml](https://github.com/mythrnr/protobuf-compiler/blob/master/examples/docker-compose.yml) に
 `.proto` ファイルのディレクトリと出力先を指定してコンパイル
 
 ```bash
@@ -18,7 +18,7 @@ docker-compose up
 ## ライセンス
 
 __NYSL Version 0.9982__  
-See [NYSL.TXT](./NYSL.TXT)
+[NYSL.TXT](https://github.com/mythrnr/protobuf-compiler/blob/master/NYSL.TXT) を参照
 
 - [NYSL Japanese](http://www.kmonos.net/nysl/)
 - [NYSL English](http://www.kmonos.net/nysl/index.en.html)
