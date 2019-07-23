@@ -1,24 +1,31 @@
 version: '3.7'
 
 services:
-  golang:
-    build:
-      context: ./golang
-      args: &buildargs
-        HTTP_PROXY: "${HTTP_PROXY}"
-        HTTPS_PROXY: "${HTTPS_PROXY}"
-    image: "zdcconsumer/basis.protobuf-compiler:golang"
-
-
   docs:
     build:
       context: ./docs
+      args: &buildargs
+        HTTP_PROXY: "${HTTP_PROXY}"
+        HTTPS_PROXY: "${HTTPS_PROXY}"
+    image: "mythrnr/protobuf-compiler:docs"
+
+
+  golang:
+    build:
+      context: ./golang
       args: *buildargs
-    image: "zdcconsumer/basis.protobuf-compiler:docs"
+    image: "mythrnr/protobuf-compiler:golang"
 
 
   php:
     build:
       context: ./php
       args: *buildargs
-    image: "zdcconsumer/basis.protobuf-compiler:php"
+    image: "mythrnr/protobuf-compiler:php"
+
+
+  python:
+    build:
+      context: ./python
+      args: *buildargs
+    image: "mythrnr/protobuf-compiler:python"

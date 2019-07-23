@@ -1,10 +1,13 @@
 syntax = "proto3";
 
-package mythrnr.grpc_example.services;
+package mythrnr.protobuf_compiler_examples.services;
 import "messages/user.proto";
-option go_package = "github.com/mythrnr/grpc-compiler/examples/golang/services";
-option php_namespace = "Mythrnr\\GrpcExample\\Services";
+option go_package = "github.com/mythrnr/protobuf-compiler/examples/golang/services";
+option php_namespace = "Mythrnr\\ProtobufCompilerExample\\Services";
 
+// user service
 service UserService {
-  rpc Get(mythrnr.grpc_example.messages.User) returns (mythrnr.grpc_example.messages.User) {}
+  // get user request
+  rpc Get(mythrnr.protobuf_compiler_examples.messages.User)
+    returns (mythrnr.protobuf_compiler_examples.messages.User) {}
 }

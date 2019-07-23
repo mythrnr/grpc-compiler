@@ -24,9 +24,7 @@ RUN set -x \
     fi \
     && unzip ${PROTOC_DOWNLOAD_FILE} \
     && mv include /usr/include \
-    && git clone -b "v${PECL_GRPC_VERSION}" https://github.com/grpc/grpc \
-    && cd /tmp/grpc \
-    && python -m pip install --upgrade \
+    && python -m pip install --upgrade --proxy=${HTTPS_PROXY} \
         pip \
         grpcio \
         grpcio-tools \
@@ -34,3 +32,7 @@ RUN set -x \
     && apk del needless_libset \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
+
+COPY ./compile.sh ./
+
+CMD ["sh", "compile.sh"]

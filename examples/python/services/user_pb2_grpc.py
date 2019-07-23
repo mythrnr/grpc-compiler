@@ -5,8 +5,8 @@ from messages import user_pb2 as messages_dot_user__pb2
 
 
 class UserServiceStub(object):
-  # missing associated documentation comment in .proto file
-  pass
+  """user service
+  """
 
   def __init__(self, channel):
     """Constructor.
@@ -15,19 +15,19 @@ class UserServiceStub(object):
       channel: A grpc.Channel.
     """
     self.Get = channel.unary_unary(
-        '/mythrnr.grpc_example.services.UserService/Get',
+        '/mythrnr.protobuf_compiler_examples.services.UserService/Get',
         request_serializer=messages_dot_user__pb2.User.SerializeToString,
         response_deserializer=messages_dot_user__pb2.User.FromString,
         )
 
 
 class UserServiceServicer(object):
-  # missing associated documentation comment in .proto file
-  pass
+  """user service
+  """
 
   def Get(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """get user request
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -42,5 +42,5 @@ def add_UserServiceServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'mythrnr.grpc_example.services.UserService', rpc_method_handlers)
+      'mythrnr.protobuf_compiler_examples.services.UserService', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

@@ -1,13 +1,18 @@
 syntax = "proto3";
 
-package mythrnr.grpc_example.messages;
+package mythrnr.protobuf_compiler_examples.messages;
 import "google/protobuf/timestamp.proto";
-option go_package = "github.com/mythrnr/grpc-compiler/examples/golang/messages";
-option php_namespace = "Mythrnr\\GrpcExample\\Messages";
+option go_package = "github.com/mythrnr/protobuf-compiler/examples/golang/messages";
+option php_namespace = "Mythrnr\\ProtobufCompilerExample\\Messages";
 
+// User data
 message User {
+  // user id
   int64 id    = 1;
+  // user name
   string name = 2;
+  // user created timestamp
   google.protobuf.Timestamp created_at = 3;
+  // user updated timestamp
   google.protobuf.Timestamp updated_at = 4;
 }
