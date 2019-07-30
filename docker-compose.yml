@@ -3,32 +3,32 @@ version: '3.7'
 services:
   docs:
     build:
-      context: ./docs
+      context: './docs'
       args: &buildargs
-        HTTP_PROXY: "${HTTP_PROXY}"
-        HTTPS_PROXY: "${HTTPS_PROXY}"
-        PROTOC_VERSION: "${PROTOC_VERSION:?required}"
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-docs"
+        HTTP_PROXY: '${HTTP_PROXY}'
+        HTTPS_PROXY: '${HTTPS_PROXY}'
+        PROTOC_VERSION: '${PROTOC_VERSION:?required}'
+    image: 'mythrnr/protobuf-compiler:${PROTOC_VERSION}-docs'
 
 
   golang:
     build:
-      context: ./golang
+      context: './golang'
       args: *buildargs
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-golang"
+    image: 'mythrnr/protobuf-compiler:${PROTOC_VERSION}-golang'
 
 
   php:
     build:
-      context: ./php
+      context: './php'
       args:
         <<: *buildargs
-        PECL_GRPC_VERSION: "${PECL_GRPC_VERSION:?required}"
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-php"
+        PECL_GRPC_VERSION: '${PECL_GRPC_VERSION:?required}'
+    image: 'mythrnr/protobuf-compiler:${PROTOC_VERSION}-php'
 
 
   python:
     build:
-      context: ./python
+      context: './python'
       args: *buildargs
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-python"
+    image: 'mythrnr/protobuf-compiler:${PROTOC_VERSION}-python'
