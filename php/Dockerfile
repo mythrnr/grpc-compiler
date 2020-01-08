@@ -5,7 +5,7 @@ ARG HTTPS_PROXY
 ARG PECL_GRPC_VERSION="1.26.0"
 ARG PROTOC_VERSION="3.11.2"
 ARG PROTOC_DOWNLOAD_FILE="protoc-${PROTOC_VERSION}-linux-x86_64.zip"
-ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip"
+ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_DOWNLOAD_FILE}"
 
 RUN set -x \
     && apk update \
@@ -39,8 +39,9 @@ RUN set -x \
     fi \
     && pecl install "grpc-${PECL_GRPC_VERSION}" "protobuf-${PROTOC_VERSION}" \
     && apk del needless_libset \
-    && rm -rf /tmp/* \
-    && rm -rf /var/cache/apk/*
+    && rm -rf \
+        /tmp/* \
+        /var/cache/apk/*
 
 COPY ./compile.sh ./
 

@@ -3,7 +3,8 @@ FROM golang:alpine
 ARG HTTPS_PROXY
 ARG PROTOC_VERSION="3.11.2"
 ARG PROTOC_DOWNLOAD_FILE="protoc-${PROTOC_VERSION}-linux-x86_64.zip"
-ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip"
+ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_DOWNLOAD_FILE}"
+ENV GO111MODULE="on"
 
 RUN set -x \
     && apk update \
@@ -20,15 +21,21 @@ RUN set -x \
     fi \
     && unzip ${PROTOC_DOWNLOAD_FILE} \
     && mv include /usr/include \
-    && go get -u \
+    && mkdir -p \
+        /go/bin \
+        /go/pkg \
+        /go/src \
+    && go get -v -u \
         google.golang.org/grpc \
         github.com/golang/protobuf/proto \
         github.com/golang/protobuf/protoc-gen-go \
         github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc \
-    && go install github.com/golang/protobuf/proto \
     && apk del needless_libset \
-    && rm -rf /tmp/* \
-    && rm -rf /var/cache/apk/*
+    && rm -rf \
+        /tmp/* \
+        /var/cache/apk/* \
+        /go/pkg/* \
+        /go/src/*
 
 COPY ./gendoc.sh ./
 

@@ -3,7 +3,7 @@ FROM python:alpine
 ARG HTTPS_PROXY
 ARG PROTOC_VERSION="3.11.2"
 ARG PROTOC_DOWNLOAD_FILE="protoc-${PROTOC_VERSION}-linux-x86_64.zip"
-ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip"
+ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_DOWNLOAD_FILE}"
 
 RUN set -x \
     && apk update \
@@ -29,8 +29,9 @@ RUN set -x \
         grpcio-tools \
         googleapis-common-protos \
     && apk del needless_libset \
-    && rm -rf /tmp/* \
-    && rm -rf /var/cache/apk/*
+    && rm -rf \
+        /tmp/* \
+        /var/cache/apk/*
 
 COPY ./compile.sh ./
 
