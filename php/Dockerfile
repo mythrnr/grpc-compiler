@@ -2,8 +2,8 @@ FROM php:fpm-alpine
 
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
-ARG PECL_GRPC_VERSION="1.22.0"
-ARG PROTOC_VERSION="3.9.0"
+ARG PECL_GRPC_VERSION="1.26.0"
+ARG PROTOC_VERSION="3.11.2"
 ARG PROTOC_DOWNLOAD_FILE="protoc-${PROTOC_VERSION}-linux-x86_64.zip"
 ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip"
 
