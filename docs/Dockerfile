@@ -1,13 +1,15 @@
 FROM golang:alpine
 
 ARG HTTPS_PROXY
-ARG PROTOC_VERSION="3.11.2"
+ARG PROTOC_VERSION
 ARG PROTOC_DOWNLOAD_FILE="protoc-${PROTOC_VERSION}-linux-x86_64.zip"
 ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_DOWNLOAD_FILE}"
 ENV GO111MODULE="on"
 
-RUN set -x \
+RUN : "${PROTOC_VERSION?:PROTOC_VERSION is required.}" \
+    && set -x \
     && apk update \
+    && apk upgrade \
     && apk add --no-cache \
         protobuf \
     && apk add --no-cache --virtual needless_libset \

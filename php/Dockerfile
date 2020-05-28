@@ -2,13 +2,16 @@ FROM php:fpm-alpine
 
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
-ARG PECL_GRPC_VERSION="1.26.0"
-ARG PROTOC_VERSION="3.11.2"
+ARG PECL_GRPC_VERSION
+ARG PROTOC_VERSION
 ARG PROTOC_DOWNLOAD_FILE="protoc-${PROTOC_VERSION}-linux-x86_64.zip"
 ARG PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_DOWNLOAD_FILE}"
 
-RUN set -x \
+RUN : "${PROTOC_VERSION?:PROTOC_VERSION is required.}" \
+    && : "${PECL_GRPC_VERSION?:PECL_GRPC_VERSION is required.}" \
+    && set -x \
     && apk update \
+    && apk upgrade \
     && apk add --no-cache \
         gcc \
     && apk add --no-cache --virtual needless_libset \
