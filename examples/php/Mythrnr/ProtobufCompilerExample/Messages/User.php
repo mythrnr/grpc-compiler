@@ -20,25 +20,25 @@ class User extends \Google\Protobuf\Internal\Message
      *
      * Generated from protobuf field <code>int64 id = 1;</code>
      */
-    private $id = 0;
+    protected $id = 0;
     /**
      * user name
      *
      * Generated from protobuf field <code>string name = 2;</code>
      */
-    private $name = '';
+    protected $name = '';
     /**
      * user created timestamp
      *
      * Generated from protobuf field <code>.google.protobuf.Timestamp created_at = 3;</code>
      */
-    private $created_at = null;
+    protected $created_at = null;
     /**
      * user updated timestamp
      *
      * Generated from protobuf field <code>.google.protobuf.Timestamp updated_at = 4;</code>
      */
-    private $updated_at = null;
+    protected $updated_at = null;
 
     /**
      * Constructor.

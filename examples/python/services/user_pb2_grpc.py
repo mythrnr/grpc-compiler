@@ -5,42 +5,64 @@ from messages import user_pb2 as messages_dot_user__pb2
 
 
 class UserServiceStub(object):
-  """user service
-  """
-
-  def __init__(self, channel):
-    """Constructor.
-
-    Args:
-      channel: A grpc.Channel.
+    """user service
     """
-    self.Get = channel.unary_unary(
-        '/mythrnr.protobuf_compiler_examples.services.UserService/Get',
-        request_serializer=messages_dot_user__pb2.User.SerializeToString,
-        response_deserializer=messages_dot_user__pb2.User.FromString,
-        )
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Get = channel.unary_unary(
+                '/mythrnr.protobuf_compiler_examples.services.UserService/Get',
+                request_serializer=messages_dot_user__pb2.User.SerializeToString,
+                response_deserializer=messages_dot_user__pb2.User.FromString,
+                )
 
 
 class UserServiceServicer(object):
-  """user service
-  """
-
-  def Get(self, request, context):
-    """get user request
+    """user service
     """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+
+    def Get(self, request, context):
+        """get user request
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_UserServiceServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'Get': grpc.unary_unary_rpc_method_handler(
-          servicer.Get,
-          request_deserializer=messages_dot_user__pb2.User.FromString,
-          response_serializer=messages_dot_user__pb2.User.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'mythrnr.protobuf_compiler_examples.services.UserService', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+            'Get': grpc.unary_unary_rpc_method_handler(
+                    servicer.Get,
+                    request_deserializer=messages_dot_user__pb2.User.FromString,
+                    response_serializer=messages_dot_user__pb2.User.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'mythrnr.protobuf_compiler_examples.services.UserService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class UserService(object):
+    """user service
+    """
+
+    @staticmethod
+    def Get(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/mythrnr.protobuf_compiler_examples.services.UserService/Get',
+            messages_dot_user__pb2.User.SerializeToString,
+            messages_dot_user__pb2.User.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -16,6 +16,7 @@ RUN : "${PROTOC_VERSION?:PROTOC_VERSION is required.}" \
         g++ \
         gcc \
         git \
+        linux-headers \
         python3-dev \
     && cd /tmp \
     && if [ "x" != "x${HTTPS_PROXY}" ]; then \

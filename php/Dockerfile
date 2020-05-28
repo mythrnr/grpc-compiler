@@ -21,6 +21,7 @@ RUN : "${PROTOC_VERSION?:PROTOC_VERSION is required.}" \
         g++ \
         git \
         libtool \
+        linux-headers \
         make \
         zlib-dev \
     && cd /tmp \
