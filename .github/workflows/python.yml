@@ -6,6 +6,7 @@ on:
       - "master"
     paths:
       - "**python**"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,10 +15,10 @@ jobs:
     strategy:
       matrix:
         protobuf_version:
-          - "3.11.2"
-          - "3.12.2"
+          - "3.12.4"
+          - "3.13.0"
     env:
-      PECL_GRPC_VERSION: "1.29.1"
+      PECL_GRPC_VERSION: "1.31.1"
       PROTOC_VERSION: "${{ matrix.protobuf_version }}"
     steps:
       - uses: "actions/checkout@v2"
@@ -48,8 +49,8 @@ jobs:
       - "build"
     runs-on: "ubuntu-latest"
     env:
-      PECL_GRPC_VERSION: "1.29.1"
-      PROTOC_VERSION: "3.12.2"
+      PECL_GRPC_VERSION: "1.31.1"
+      PROTOC_VERSION: "3.13.0"
     steps:
       - name: "Login Dockerhub"
         run: |
