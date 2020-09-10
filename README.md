@@ -22,7 +22,7 @@ The tool to generate gRPC codes by docker.
 ## Build with Protocol Buffers version
 
 ```bash
-PROTOC_VERSION=3.11.2 PECL_GRPC_VERSION=1.26.0 docker-compose build --parallel
+PROTOC_VERSION=3.13.0 PECL_GRPC_VERSION=1.31.1 docker-compose build --parallel
 ```
 
 ## License
