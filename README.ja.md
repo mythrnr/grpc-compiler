@@ -55,13 +55,14 @@ make build go=1.13 protoc=3.12
 
 ### 特定のイメージのみビルドする
 
-- `push` 実行時に他のイメージがないとエラーになるので, 特定のイメージをビルドしたら `push` 時にも指定する
+- `push` 実行時に他のイメージがないとエラーになるので,  
+特定のイメージをビルドしたら `push` 時にも指定する
 
 ```bash
 make golang go=1.14
 
 # Good
-make push service=golang
+make push service=golang go=1.14
 
 # Not work
 make push
