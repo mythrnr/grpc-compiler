@@ -14,15 +14,15 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        protobuf_version:
-          - "3.12.4"
-          - "3.13.0"
         pecl_grpc_version:
-          - "1.30.0"
-          - "1.31.1"
-    env:
-      PECL_GRPC_VERSION: "${{ matrix.pecl_grpc_version }}"
-      PROTOC_VERSION: "${{ matrix.protobuf_version }}"
+          - "1.33.1"
+          - "1.34.0"
+        php_version:
+          - "7.3"
+          - "7.4"
+        protobuf_version:
+          - "3.13.0"
+          - "3.14.0"
     steps:
       - uses: "actions/checkout@v2"
 
@@ -41,34 +41,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: "Build Image"
-        run: make build service=php
+        run: |
+          make php \
+            pecl_grpc=${{ matrix.pecl_grpc_version }} \
+            php=${{ matrix.php_version }} \
+            protoc=${{ matrix.protobuf_version }}
 
       - name: "Push Image"
         run: make push service=php
-
-  build-latest:
-    name: "Build Latest"
-    needs:
-      - "build"
-    runs-on: "ubuntu-latest"
-    env:
-      PECL_GRPC_VERSION: "1.31.1"
-      PROTOC_VERSION: "3.13.0"
-    steps:
-      - name: "Login Dockerhub"
-        uses: "docker/login-action@v1"
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: "Pull Image"
-        run: "docker pull mythrnr/protobuf-compiler:${PROTOC_VERSION}-php"
-
-      - name: "Tag Latest Image"
-        run: |
-          docker tag \
-            mythrnr/protobuf-compiler:${PROTOC_VERSION}-php \
-            mythrnr/protobuf-compiler:latest-php
-
-      - name: "Push Image"
-        run: "docker push mythrnr/protobuf-compiler:latest-php"

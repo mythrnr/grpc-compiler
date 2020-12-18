@@ -7,6 +7,7 @@ services:
       args: &buildargs
         HTTP_PROXY: "${HTTP_PROXY}"
         HTTPS_PROXY: "${HTTPS_PROXY}"
+        LANG_VERSION: "${GO_VERSION:?required}"
         PROTOC_VERSION: "${PROTOC_VERSION:?required}"
     image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-docs"
 
@@ -14,18 +15,21 @@ services:
     build:
       context: "./golang"
       args: *buildargs
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-golang"
+    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-golang-${GO_VERSION}"
 
   php:
     build:
       context: "./php"
       args:
         <<: *buildargs
+        LANG_VERSION: "${PHP_VERSION:?required}"
         PECL_GRPC_VERSION: "${PECL_GRPC_VERSION:?required}"
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-php"
+    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-php-${PHP_VERSION}"
 
   python:
     build:
       context: "./python"
-      args: *buildargs
-    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-python"
+      args:
+        <<: *buildargs
+        LANG_VERSION: "${PYTHON_VERSION:?required}"
+    image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-python-${PYTHON_VERSION}"

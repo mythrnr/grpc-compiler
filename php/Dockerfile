@@ -1,4 +1,6 @@
-FROM php:fpm-alpine
+ARG LANG_VERSION
+
+FROM php:${LANG_VERSION}-fpm-alpine
 
 ARG HTTP_PROXY
 ARG HTTPS_PROXY

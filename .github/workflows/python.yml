@@ -14,12 +14,12 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
+        python_version:
+          - "3.8"
+          - "3.9"
         protobuf_version:
-          - "3.12.4"
           - "3.13.0"
-    env:
-      PECL_GRPC_VERSION: "1.31.1"
-      PROTOC_VERSION: "${{ matrix.protobuf_version }}"
+          - "3.14.0"
     steps:
       - uses: "actions/checkout@v2"
 
@@ -38,34 +38,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: "Build Image"
-        run: make build service=python
+        run: |
+          make python \
+            protoc=${{ matrix.protobuf_version }} \
+            python=${{ matrix.python_version }}
 
       - name: "Push Image"
         run: make push service=python
-
-  build-latest:
-    name: "Build Latest"
-    needs:
-      - "build"
-    runs-on: "ubuntu-latest"
-    env:
-      PECL_GRPC_VERSION: "1.31.1"
-      PROTOC_VERSION: "3.13.0"
-    steps:
-      - name: "Login Dockerhub"
-        uses: "docker/login-action@v1"
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: "Pull Image"
-        run: "docker pull mythrnr/protobuf-compiler:${PROTOC_VERSION}-python"
-
-      - name: "Tag Latest Image"
-        run: |
-          docker tag \
-            mythrnr/protobuf-compiler:${PROTOC_VERSION}-python \
-            mythrnr/protobuf-compiler:latest-python
-
-      - name: "Push Image"
-        run: "docker push mythrnr/protobuf-compiler:latest-python"

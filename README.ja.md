@@ -2,7 +2,7 @@
 
 [English](https://github.com/mythrnr/protobuf-compiler/blob/master/README.md)
 
-gRPCのコードをDockerで手軽に生成するツール。
+gRPC のコードを Docker で手軽に生成するツール。
 プロジェクトごとに用意するのが面倒だったのでツール化。
 
 ## Status
@@ -19,16 +19,52 @@ gRPCのコードをDockerで手軽に生成するツール。
 
 - 詳細は [Examples](https://github.com/mythrnr/protobuf-compiler/tree/master/examples) を参照
 - [docker-compose.yml](https://github.com/mythrnr/protobuf-compiler/blob/master/examples/docker-compose.yml) に
-`.proto` ファイルのディレクトリと出力先を指定してコンパイル
+`.proto` ファイルのディレクトリと出力先を指定して下記を実行
 
 ```bash
 docker-compose up
 ```
 
-## Protocol Buffersのバージョンを指定してイメージをビルドする
+## イメージのビルド
+
+### すべてビルドしてプッシュする
 
 ```bash
-PROTOC_VERSION=3.13.0 PECL_GRPC_VERSION=1.31.1 docker-compose build --parallel
+make build
+
+make push
+```
+
+### Makefileのオプションについて
+
+| Key | Default | Description |
+|-|-|-|
+| `go` | `1.15` | イメージ内の Go のバージョン |
+| `pecl_grpc` | `1.34.0` | PECL の gRPC のバージョン（[PECL::Package::gRPC](https://pecl.php.net/package/gRPC)） |
+| `php` | `7.4` | イメージ内の PHP のバージョン |
+| `protoc` | `3.14.0` | イメージ内の protoc のバージョン（[protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf/releases)） |
+| `python` | `3.9` | イメージ内の Python のバージョン |
+| `service` | - | `docs` , `golang` , `php` , `python` から特定のもののみビルドした場合, `push` 時に指定 |
+
+⚠️ `PHP5` 系はサポート切れの為, `pecl_grpc` のバージョンを `1.33.1` までにしなければビルドできない
+
+
+```bash
+make build go=1.13 protoc=3.12
+```
+
+### 特定のイメージのみビルドする
+
+- `push` 実行時に他のイメージがないとエラーになるので, 特定のイメージをビルドしたら `push` 時にも指定する
+
+```bash
+make golang go=1.14
+
+# Good
+make push service=golang
+
+# Not work
+make push
 ```
 
 ## ライセンス

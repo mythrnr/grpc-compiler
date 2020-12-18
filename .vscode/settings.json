@@ -1,0 +1,11 @@
+{
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": true
+  },
+  "editor.formatOnSave": false,
+  "editor.insertSpaces": false
+}

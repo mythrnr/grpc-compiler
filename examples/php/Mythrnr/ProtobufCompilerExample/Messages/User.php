@@ -121,7 +121,17 @@ class User extends \Google\Protobuf\Internal\Message
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return isset($this->created_at) ? $this->created_at : null;
+    }
+
+    public function hasCreatedAt()
+    {
+        return isset($this->created_at);
+    }
+
+    public function clearCreatedAt()
+    {
+        unset($this->created_at);
     }
 
     /**
@@ -147,7 +157,17 @@ class User extends \Google\Protobuf\Internal\Message
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return isset($this->updated_at) ? $this->updated_at : null;
+    }
+
+    public function hasUpdatedAt()
+    {
+        return isset($this->updated_at);
+    }
+
+    public function clearUpdatedAt()
+    {
+        unset($this->updated_at);
     }
 
     /**

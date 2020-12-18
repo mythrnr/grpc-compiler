@@ -22,6 +22,7 @@ class UserServiceClient extends \Grpc\BaseStub {
      * @param \Mythrnr\ProtobufCompilerExample\Messages\User $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
+     * @return \Grpc\UnaryCall
      */
     public function Get(\Mythrnr\ProtobufCompilerExample\Messages\User $argument,
       $metadata = [], $options = []) {
