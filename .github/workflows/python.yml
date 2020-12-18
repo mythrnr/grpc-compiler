@@ -39,6 +39,10 @@ jobs:
 
       - name: "Build Image"
         run: |
+          make pull service=python \
+            protoc=${{ matrix.protobuf_version }} \
+            python=${{ matrix.python_version }}
+
           make python \
             protoc=${{ matrix.protobuf_version }} \
             python=${{ matrix.python_version }}

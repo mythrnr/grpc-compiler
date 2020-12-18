@@ -1,4 +1,4 @@
-.PHONY: build config docs golang php push python
+.PHONY: build config docs golang php pull push python
 
 go ?= 1.15
 pecl_grpc = 1.34.0
@@ -47,6 +47,14 @@ php:
 	docker-compose build php
 
 service =
+
+pull:
+	GO_VERSION="$(go)" \
+	PECL_GRPC_VERSION="$(pecl_grpc)" \
+	PHP_VERSION="$(php)" \
+	PROTOC_VERSION="$(protoc)" \
+	PYTHON_VERSION="$(python)" \
+	docker-compose pull $(service)
 
 push:
 	GO_VERSION="$(go)" \

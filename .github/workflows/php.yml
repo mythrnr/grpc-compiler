@@ -14,15 +14,14 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        pecl_grpc_version:
-          - "1.33.1"
-          - "1.34.0"
         php_version:
           - "7.3"
           - "7.4"
         protobuf_version:
           - "3.13.0"
           - "3.14.0"
+    env:
+      PECL_GRPC_VERSION: "1.34.0"
     steps:
       - uses: "actions/checkout@v2"
 
@@ -42,14 +41,19 @@ jobs:
 
       - name: "Build Image"
         run: |
+          make pull service=php \
+            pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
+            php=${{ matrix.php_version }} \
+            protoc=${{ matrix.protobuf_version }}
+
           make php \
-            pecl_grpc=${{ matrix.pecl_grpc_version }} \
+            pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
             php=${{ matrix.php_version }} \
             protoc=${{ matrix.protobuf_version }}
 
       - name: "Push Image"
         run: |
           make push service=php \
-            pecl_grpc=${{ matrix.pecl_grpc_version }} \
+            pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
             php=${{ matrix.php_version }} \
             protoc=${{ matrix.protobuf_version }}
