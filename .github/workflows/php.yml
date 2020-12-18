@@ -48,4 +48,8 @@ jobs:
             protoc=${{ matrix.protobuf_version }}
 
       - name: "Push Image"
-        run: make push service=php
+        run: |
+          make push service=php \
+            pecl_grpc=${{ matrix.pecl_grpc_version }} \
+            php=${{ matrix.php_version }} \
+            protoc=${{ matrix.protobuf_version }}

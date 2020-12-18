@@ -44,4 +44,7 @@ jobs:
             python=${{ matrix.python_version }}
 
       - name: "Push Image"
-        run: make push service=python
+        run: |
+          make push service=python \
+            protoc=${{ matrix.protobuf_version }} \
+            python=${{ matrix.python_version }}

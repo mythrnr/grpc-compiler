@@ -44,4 +44,7 @@ jobs:
             protoc=${{ matrix.protobuf_version }}
 
       - name: "Push Image"
-        run: make push service=golang
+        run: |
+          make push service=golang \
+            go=${{ matrix.go_version }} \
+            protoc=${{ matrix.protobuf_version }}

@@ -35,7 +35,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: "Build Image"
-        run: make docs protoc=${{ matrix.protobuf_version }}
+        run: |
+          make docs \
+            protoc=${{ matrix.protobuf_version }}
 
       - name: "Push Image"
-        run: make push service=docs
+        run: |
+          make push service=docs \
+            protoc=${{ matrix.protobuf_version }}
