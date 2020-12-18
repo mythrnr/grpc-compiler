@@ -1,4 +1,10 @@
-.PHONY: build config docs golang php pull push python
+.PHONY: build config docs golang php push python
+
+#######################################
+#
+# Recipes for Building Images
+#
+#######################################
 
 go ?= 1.15
 pecl_grpc = 1.34.0
@@ -7,6 +13,8 @@ protoc ?= 3.14.0
 python ?= 3.9
 
 build:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
@@ -15,6 +23,8 @@ build:
 	docker-compose build --parallel
 
 config:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
@@ -23,6 +33,8 @@ config:
 	docker-compose config
 
 docs:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
@@ -31,6 +43,8 @@ docs:
 	docker-compose build docs
 
 golang:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
@@ -39,6 +53,8 @@ golang:
 	docker-compose build golang
 
 php:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
@@ -46,17 +62,27 @@ php:
 	PYTHON_VERSION="$(python)" \
 	docker-compose build php
 
-service =
-
-pull:
+python:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
 	PROTOC_VERSION="$(protoc)" \
 	PYTHON_VERSION="$(python)" \
-	docker-compose pull $(service)
+	docker-compose build python
+
+#######################################
+#
+# Recipes for Managing Images
+#
+#######################################
+
+service =
 
 push:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
@@ -64,10 +90,17 @@ push:
 	PYTHON_VERSION="$(python)" \
 	docker-compose push $(service)
 
-python:
+trivy:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
 	PECL_GRPC_VERSION="$(pecl_grpc)" \
 	PHP_VERSION="$(php)" \
 	PROTOC_VERSION="$(protoc)" \
 	PYTHON_VERSION="$(python)" \
-	docker-compose build python
+	docker images --format "{{.Repository}}:{{.Tag}}" \
+		| grep "mythrnr/protobuf-compiler" \
+		| grep "$(service)" \
+		| xargs -I{} trivy -q \
+			--severity HIGH,CRITICAL \
+			--exit-code 1 {}

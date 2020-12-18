@@ -9,12 +9,16 @@ services:
         HTTPS_PROXY: "${HTTPS_PROXY}"
         LANG_VERSION: "${GO_VERSION:?required}"
         PROTOC_VERSION: "${PROTOC_VERSION:?required}"
+      cache_from:
+        - "mythrnr/protobuf-compiler:${PROTOC_VERSION}-docs"
     image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-docs"
 
   golang:
     build:
       context: "./golang"
       args: *buildargs
+      cache_from:
+        - "mythrnr/protobuf-compiler:${PROTOC_VERSION}-golang-${GO_VERSION}"
     image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-golang-${GO_VERSION}"
 
   php:
@@ -24,6 +28,8 @@ services:
         <<: *buildargs
         LANG_VERSION: "${PHP_VERSION:?required}"
         PECL_GRPC_VERSION: "${PECL_GRPC_VERSION:?required}"
+      cache_from:
+        - "mythrnr/protobuf-compiler:${PROTOC_VERSION}-php-${PHP_VERSION}"
     image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-php-${PHP_VERSION}"
 
   python:
@@ -32,4 +38,6 @@ services:
       args:
         <<: *buildargs
         LANG_VERSION: "${PYTHON_VERSION:?required}"
+      cache_from:
+        - "mythrnr/protobuf-compiler:${PROTOC_VERSION}-python-${PYTHON_VERSION}"
     image: "mythrnr/protobuf-compiler:${PROTOC_VERSION}-python-${PYTHON_VERSION}"

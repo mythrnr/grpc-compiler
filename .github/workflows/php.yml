@@ -41,12 +41,12 @@ jobs:
 
       - name: "Build Image"
         run: |
-          make pull service=php \
+          make php \
             pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
             php=${{ matrix.php_version }} \
             protoc=${{ matrix.protobuf_version }}
 
-          make php \
+          make trivy service=php \
             pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
             php=${{ matrix.php_version }} \
             protoc=${{ matrix.protobuf_version }}

@@ -39,11 +39,11 @@ jobs:
 
       - name: "Build Image"
         run: |
-          make pull service=golang \
+          make golang \
             go=${{ matrix.go_version }} \
             protoc=${{ matrix.protobuf_version }}
 
-          make golang \
+          make trivy service=golang \
             go=${{ matrix.go_version }} \
             protoc=${{ matrix.protobuf_version }}
 

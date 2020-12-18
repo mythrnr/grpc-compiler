@@ -39,11 +39,11 @@ jobs:
 
       - name: "Build Image"
         run: |
-          make pull service=python \
+          make python \
             protoc=${{ matrix.protobuf_version }} \
             python=${{ matrix.python_version }}
 
-          make python \
+          make trivy service=python \
             protoc=${{ matrix.protobuf_version }} \
             python=${{ matrix.python_version }}
 
