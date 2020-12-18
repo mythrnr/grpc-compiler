@@ -1,4 +1,4 @@
-.PHONY: build config docs golang php push python
+.PHONY: build check config docs golang php push python
 
 #######################################
 #
@@ -21,16 +21,6 @@ build:
 	PROTOC_VERSION="$(protoc)" \
 	PYTHON_VERSION="$(python)" \
 	docker-compose build --parallel
-
-config:
-	DOCKER_BUILDKIT=1 \
-	COMPOSE_DOCKER_CLI_BUILD=1 \
-	GO_VERSION="$(go)" \
-	PECL_GRPC_VERSION="$(pecl_grpc)" \
-	PHP_VERSION="$(php)" \
-	PROTOC_VERSION="$(protoc)" \
-	PYTHON_VERSION="$(python)" \
-	docker-compose config
 
 docs:
 	DOCKER_BUILDKIT=1 \
@@ -80,6 +70,16 @@ python:
 
 service =
 
+config:
+	DOCKER_BUILDKIT=1 \
+	COMPOSE_DOCKER_CLI_BUILD=1 \
+	GO_VERSION="$(go)" \
+	PECL_GRPC_VERSION="$(pecl_grpc)" \
+	PHP_VERSION="$(php)" \
+	PROTOC_VERSION="$(protoc)" \
+	PYTHON_VERSION="$(python)" \
+	docker-compose config
+
 push:
 	DOCKER_BUILDKIT=1 \
 	COMPOSE_DOCKER_CLI_BUILD=1 \
@@ -90,7 +90,7 @@ push:
 	PYTHON_VERSION="$(python)" \
 	docker-compose push $(service)
 
-trivy:
+check:
 	DOCKER_BUILDKIT=1 \
 	COMPOSE_DOCKER_CLI_BUILD=1 \
 	GO_VERSION="$(go)" \
@@ -98,9 +98,11 @@ trivy:
 	PHP_VERSION="$(php)" \
 	PROTOC_VERSION="$(protoc)" \
 	PYTHON_VERSION="$(python)" \
-	docker images --format "{{.Repository}}:{{.Tag}}" \
+	&& cmd_trivy="trivy --quiet --severity HIGH,CRITICAL --exit-code 1" \
+	&& cmd_dockle="dockle" \
+	&& docker images --format "{{if ne .Tag \"<none>\"}}{{.Repository}}:{{.Tag}}{{end}}" \
 		| grep "mythrnr/protobuf-compiler" \
 		| grep "$(service)" \
-		| xargs -I{} trivy -q \
-			--severity HIGH,CRITICAL \
-			--exit-code 1 {}
+		| sort \
+		| xargs -t -L 1 -I{} \
+			sh -c "$${cmd_trivy} {}; $${cmd_dockle} {}"
