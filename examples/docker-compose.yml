@@ -24,7 +24,7 @@ services:
         target: "/proto"
         read_only: true
       - type: "bind"
-        source: "../"
+        source: ".."
         target: "/output"
         read_only: false
 
