@@ -6,6 +6,8 @@ on:
       - "master"
     paths:
       - "**php**"
+  schedule:
+    - cron: "0 12 * * 2"
   workflow_dispatch:
 
 jobs:
@@ -20,8 +22,9 @@ jobs:
         protobuf_version:
           - "3.13.0"
           - "3.14.0"
+          - "3.15.6"
     env:
-      PECL_GRPC_VERSION: "1.34.0"
+      PECL_GRPC_VERSION: "1.36.0"
     steps:
       - uses: "actions/checkout@v2"
 

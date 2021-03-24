@@ -3,9 +3,8 @@
     "files.trimTrailingWhitespace": false
   },
   "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.insertSpaces": false
 }

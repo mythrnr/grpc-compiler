@@ -6,13 +6,10 @@ The tool to generate gRPC codes by docker.
 
 ## Status
 
-[![Build Image for Documenter](https://github.com/mythrnr/protobuf-compiler/workflows/Build%20Image%20for%20Documenter/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions?query=workflow%3A%22Build+Image+for+Documenter%22)
-
-[![Build Image Golang](https://github.com/mythrnr/protobuf-compiler/workflows/Build%20Image%20Golang/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions?query=workflow%3A%22Build+Image+Golang%22)
-
-[![Build Image for PHP](https://github.com/mythrnr/protobuf-compiler/workflows/Build%20Image%20for%20PHP/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions?query=workflow%3A%22Build+Image+for+PHP%22)
-
-[![Build Image for Python](https://github.com/mythrnr/protobuf-compiler/workflows/Build%20Image%20for%20Python/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions?query=workflow%3A%22Build+Image+for+Python%22)
+[![Build Image for Documenter](https://github.com/mythrnr/protobuf-compiler/actions/workflows/docs.yml/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions/workflows/docs.yml)
+[![Build Image for Golang](https://github.com/mythrnr/protobuf-compiler/actions/workflows/golang.yml/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions/workflows/golang.yml)
+[![Build Image for PHP](https://github.com/mythrnr/protobuf-compiler/actions/workflows/php.yml/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions/workflows/php.yml)
+[![Build Image for Python](https://github.com/mythrnr/protobuf-compiler/actions/workflows/python.yml/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions/workflows/python.yml)
 
 ## Usage
 
@@ -35,14 +32,14 @@ make push
 
 ### About Makefile options
 
-| Key | Default | Description |
-|-|-|-|
-| `go` | `1.15` | Go Version in the image |
-| `pecl_grpc` | `1.34.0` | PECL::Package::gRPC Version in the image（[PECL::Package::gRPC](https://pecl.php.net/package/gRPC)） |
-| `php` | `7.4` | PHP Version in the image |
-| `protoc` | `3.14.0` | protoc Version in the image（[protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf/releases)） |
-| `python` | `3.9` | Python Version in the image |
-| `service` | - | If you build only certain things from `docs` , `golang` , `php` or `python`, specify when to `push`. |
+| Key         | Default  | Description                                                                                                   |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `go`        | `1.16`   | Go Version in the image                                                                                       |
+| `pecl_grpc` | `1.36.0` | PECL::Package::gRPC Version in the image（[PECL::Package::gRPC](https://pecl.php.net/package/gRPC)             |
+| `php`       | `7.4`    | PHP Version in the image                                                                                      |
+| `protoc`    | `3.15.6` | protoc Version in the image（[protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf/releases)） |
+| `python`    | `3.9`    | Python Version in the image                                                                                   |
+| `service`   | -        | If you build only certain things from `docs` , `golang` , `php` or `python`, specify when to `push`.          |
 
 ⚠️ Because `PHP5` series is no longer supported, the version of `pecl_grpc` must be up to `1.33.1` to be able to build.
 
@@ -55,10 +52,10 @@ make build go=1.13 protoc=3.12
 - If you build a specific image, you should also specify it at `push` time.
 
 ```bash
-make golang go=1.14
+make golang go=1.16
 
 # Good
-make push service=golang go=1.14
+make push service=golang go=1.16
 
 # Not work
 make push
@@ -66,8 +63,8 @@ make push
 
 ## License
 
-__NYSL Version 0.9982__
-See [NYSL.TXT](https://github.com/mythrnr/protobuf-compiler/blob/master/NYSL.TXT)
+**NYSL Version 0.9982**  
+See [LICENCE](https://github.com/mythrnr/protobuf-compiler/blob/master/LICENCE)
 
 - [NYSL Japanese](http://www.kmonos.net/nysl/)
 - [NYSL English](http://www.kmonos.net/nysl/index.en.html)
