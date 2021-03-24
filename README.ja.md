@@ -5,6 +5,9 @@
 gRPC のコードを Docker で手軽に生成するツール。
 プロジェクトごとに用意するのが面倒だったのでツール化。
 
+⚠️ 現在, PHP はビルド不可.  
+参考 Issue: <https://github.com/grpc/grpc/issues/25725>
+
 ## Status
 
 [![Build Image for Documenter](https://github.com/mythrnr/protobuf-compiler/actions/workflows/docs.yml/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions/workflows/docs.yml)

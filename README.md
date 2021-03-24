@@ -4,6 +4,9 @@
 
 The tool to generate gRPC codes by docker.
 
+⚠️ Now, PHP image cannnot build.  
+Issue: <https://github.com/grpc/grpc/issues/25725>
+
 ## Status
 
 [![Build Image for Documenter](https://github.com/mythrnr/protobuf-compiler/actions/workflows/docs.yml/badge.svg)](https://github.com/mythrnr/protobuf-compiler/actions/workflows/docs.yml)

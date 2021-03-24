@@ -1,13 +1,14 @@
 name: "Build Image for PHP"
 
 on:
-  push:
-    branches:
-      - "master"
-    paths:
-      - "**php**"
-  schedule:
-    - cron: "0 12 * * 2"
+  # FIXME: https://github.com/grpc/grpc の Makefile から grpc_php_plugin が消えてビルドできないので一旦停止.
+  # push:
+  #   branches:
+  #     - "master"
+  #   paths:
+  #     - "**php**"
+  # schedule:
+  #   - cron: "0 12 * * 2"
   workflow_dispatch:
 
 jobs:
