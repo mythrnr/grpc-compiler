@@ -9,7 +9,7 @@
 go ?= 1.16
 pecl_grpc = 1.36.0
 php ?= 7.4
-protoc ?= 3.15.6
+protoc ?= 3.15.7
 python ?= 3.9
 
 build:
