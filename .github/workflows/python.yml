@@ -22,7 +22,7 @@ jobs:
         protobuf_version:
           - "3.13.0"
           - "3.14.0"
-          - "3.15.7"
+          - "3.15.8"
     steps:
       - uses: "actions/checkout@v2"
 

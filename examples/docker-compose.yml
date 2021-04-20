@@ -3,7 +3,7 @@ version: "3.8"
 # container to compile .proto files
 services:
   docs:
-    image: "mythrnr/protobuf-compiler:3.15.7-docs"
+    image: "mythrnr/protobuf-compiler:3.15.8-docs"
     volumes:
       - type: "bind"
         source: "./proto"
@@ -15,7 +15,7 @@ services:
         read_only: false
 
   golang:
-    image: "mythrnr/protobuf-compiler:3.15.7-golang-1.16"
+    image: "mythrnr/protobuf-compiler:3.15.8-golang-1.16"
     environment:
       PACKAGE_ROOT: "github.com/mythrnr/protobuf-compiler"
     volumes:
@@ -29,7 +29,7 @@ services:
         read_only: false
 
   php:
-    image: "mythrnr/protobuf-compiler:3.15.7-php-7.4"
+    image: "mythrnr/protobuf-compiler:3.15.8-php-7.4"
     volumes:
       - type: "bind"
         source: "./proto"
@@ -41,7 +41,7 @@ services:
         read_only: false
 
   python:
-    image: "mythrnr/protobuf-compiler:3.15.7-python-3.9"
+    image: "mythrnr/protobuf-compiler:3.15.8-python-3.9"
     volumes:
       - type: "bind"
         source: "./proto"
