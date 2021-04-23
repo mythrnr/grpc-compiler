@@ -1,0 +1,54 @@
+# via https://docs.github.com/en/actions/creating-actions/creating-a-composite-run-steps-action#creating-an-action-metadata-file
+name: "Build and Push Images"
+description: "Build docker image and push to dockerhub."
+inputs:
+  lang:
+    description: "Target to build (docs|go|php|python)"
+    required: true
+  go:
+    description: "Go version for building golang"
+    required: true
+    default: "1.16"
+  pecl_grpc:
+    description: "PECL::gRPC version for building php"
+    required: true
+    default: "1.37.0"
+  php:
+    description: "PHP version for building php"
+    required: true
+    default: "7.4"
+  protoc:
+    description: "Protocol Buffer version for building all images"
+    required: true
+    default: "3.15.8"
+  python:
+    description: "Python version for building python"
+    required: true
+    default: "3.9"
+runs:
+  using: "composite"
+  steps:
+    - shell: "bash"
+      run: |
+        make ${{ inputs.lang }} \
+          go=${{ matrix.go_version }} \
+          pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
+          php=${{ matrix.php_version }} \
+          protoc=${{ matrix.protobuf_version }} \
+          python=${{ matrix.python_version }}
+
+        make check \
+          service=${{ inputs.lang }} \
+          go=${{ matrix.go_version }} \
+          pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
+          php=${{ matrix.php_version }} \
+          protoc=${{ matrix.protobuf_version }} \
+          python=${{ matrix.python_version }}
+
+        make push \
+          service=${{ inputs.lang }} \
+          go=${{ matrix.go_version }} \
+          pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
+          php=${{ matrix.php_version }} \
+          protoc=${{ matrix.protobuf_version }} \
+          python=${{ matrix.python_version }}
