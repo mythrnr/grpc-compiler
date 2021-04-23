@@ -1,6 +1,6 @@
 # via https://docs.github.com/en/actions/creating-actions/creating-a-composite-run-steps-action#creating-an-action-metadata-file
 name: "Install trivy and dockle"
-description: "Install security checker."
+description: "Install vulnerability checker."
 runs:
   using: "composite"
   steps:
