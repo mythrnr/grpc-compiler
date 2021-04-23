@@ -31,24 +31,24 @@ runs:
     - shell: "bash"
       run: |
         make ${{ inputs.lang }} \
-          go=${{ matrix.go_version }} \
-          pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
-          php=${{ matrix.php_version }} \
-          protoc=${{ matrix.protobuf_version }} \
-          python=${{ matrix.python_version }}
+          go=${{ inputs.go_version }} \
+          pecl_grpc=${{ inputs.pecl_grpc }} \
+          php=${{ inputs.php_version }} \
+          protoc=${{ inputs.protobuf_version }} \
+          python=${{ inputs.python_version }}
 
         make check \
           service=${{ inputs.lang }} \
-          go=${{ matrix.go_version }} \
-          pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
-          php=${{ matrix.php_version }} \
-          protoc=${{ matrix.protobuf_version }} \
-          python=${{ matrix.python_version }}
+          go=${{ inputs.go_version }} \
+          pecl_grpc=${{ inputs.pecl_grpc }} \
+          php=${{ inputs.php_version }} \
+          protoc=${{ inputs.protobuf_version }} \
+          python=${{ inputs.python_version }}
 
         make push \
           service=${{ inputs.lang }} \
-          go=${{ matrix.go_version }} \
-          pecl_grpc=${{ env.PECL_GRPC_VERSION }} \
-          php=${{ matrix.php_version }} \
-          protoc=${{ matrix.protobuf_version }} \
-          python=${{ matrix.python_version }}
+          go=${{ inputs.go_version }} \
+          pecl_grpc=${{ inputs.pecl_grpc }} \
+          php=${{ inputs.php_version }} \
+          protoc=${{ inputs.protobuf_version }} \
+          python=${{ inputs.python_version }}
