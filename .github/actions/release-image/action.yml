@@ -34,7 +34,7 @@ runs:
           go=${{ inputs.go }} \
           pecl_grpc=${{ inputs.pecl_grpc }} \
           php=${{ inputs.php }} \
-          protoc=${{ inputs.protobuf }} \
+          protoc=${{ inputs.protoc }} \
           python=${{ inputs.python }}
 
         make check \
@@ -42,7 +42,7 @@ runs:
           go=${{ inputs.go }} \
           pecl_grpc=${{ inputs.pecl_grpc }} \
           php=${{ inputs.php }} \
-          protoc=${{ inputs.protobuf }} \
+          protoc=${{ inputs.protoc }} \
           python=${{ inputs.python }}
 
         make push \
@@ -50,5 +50,5 @@ runs:
           go=${{ inputs.go }} \
           pecl_grpc=${{ inputs.pecl_grpc }} \
           php=${{ inputs.php }} \
-          protoc=${{ inputs.protobuf }} \
+          protoc=${{ inputs.protoc }} \
           python=${{ inputs.python }}

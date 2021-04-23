@@ -20,7 +20,7 @@ jobs:
         php:
           - "7.3"
           - "7.4"
-        protobuf:
+        protoc:
           - "3.13.0"
           - "3.14.0"
           - "3.15.8"
@@ -42,4 +42,4 @@ jobs:
           lang: "php"
           pecl_grpc: "${{ env.PECL_GRPC_VERSION }}"
           php: "${{ matrix.php }}"
-          protoc: "${{ matrix.protobuf }}"
+          protoc: "${{ matrix.protoc }}"
