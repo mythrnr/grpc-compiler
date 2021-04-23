@@ -31,24 +31,24 @@ runs:
     - shell: "bash"
       run: |
         make ${{ inputs.lang }} \
-          go=${{ inputs.go_version }} \
+          go=${{ inputs.go }} \
           pecl_grpc=${{ inputs.pecl_grpc }} \
-          php=${{ inputs.php_version }} \
-          protoc=${{ inputs.protobuf_version }} \
-          python=${{ inputs.python_version }}
+          php=${{ inputs.php }} \
+          protoc=${{ inputs.protobuf }} \
+          python=${{ inputs.python }}
 
         make check \
           service=${{ inputs.lang }} \
-          go=${{ inputs.go_version }} \
+          go=${{ inputs.go }} \
           pecl_grpc=${{ inputs.pecl_grpc }} \
-          php=${{ inputs.php_version }} \
-          protoc=${{ inputs.protobuf_version }} \
-          python=${{ inputs.python_version }}
+          php=${{ inputs.php }} \
+          protoc=${{ inputs.protobuf }} \
+          python=${{ inputs.python }}
 
         make push \
           service=${{ inputs.lang }} \
-          go=${{ inputs.go_version }} \
+          go=${{ inputs.go }} \
           pecl_grpc=${{ inputs.pecl_grpc }} \
-          php=${{ inputs.php_version }} \
-          protoc=${{ inputs.protobuf_version }} \
-          python=${{ inputs.python_version }}
+          php=${{ inputs.php }} \
+          protoc=${{ inputs.protobuf }} \
+          python=${{ inputs.python }}
